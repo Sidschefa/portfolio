@@ -1,0 +1,9 @@
+.container2 {
+    width: 97%;
+    height: 700px;
+    padding: 20%;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    border: 2px sold rgba(255, 255, 255, 0.2);
+   
+}

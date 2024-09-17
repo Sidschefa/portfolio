@@ -1,0 +1,35 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    box-sizing: border-box;
+    
+}
+
+.header{
+    background-image: url("assets/5508.jpg");
+    background-size: cover;
+    background-position: center;    
+}
+
+.App{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; 
+}
+
+.navigate {
+    display: flex;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    border: 2px sold rgba(255, 255, 255, 0.2);
+    padding: 20px;    
+}
+
+.navigate h1{
+    color: #fff;
+}
+
+

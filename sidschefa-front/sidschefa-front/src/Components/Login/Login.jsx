@@ -23,55 +23,60 @@ const Login = () => {
 
             const token = response.data.token;
 
-            localStorage.setItem('token', token);                        
+            localStorage.setItem('token', token);
 
             console.log("Login bem sucedido", token);
 
-            navigate('/UserRegister');
+            navigate('/');
+            location.reload();
 
-            setLogin(""); 
+            setLogin("");
             setPassword("");
 
-        } catch(err){
+        } catch (err) {
             console.error("erro ao fazer login", err);
             setError("Credenciais inválidas. Tente novamente.");
             alert("Usuário ou senha inválido.")
-            
-            setLogin(""); 
+
+            setLogin("");
             setPassword("");
 
         }
-    
+
     }
 
-  return (
-    <div className='container'>
-        <form onSubmit={handleSubmit}>
-            <h1>Entrar</h1>
-            <div className='input-field'>
-                 <input type='text' placeholder='Login' value={login}
-                 onChange={(e) => setLogin(e.target.value)} />
-                 <FaUser className='icon' />
-            </div>
-            <div className='input-field'>
-                 <input type="password" placeholder='Senha' value={password}
-                 onChange={(e) => setPassword(e.target.value)} />
-                 <FaLock className='icon' />
-            </div>
+    return (
 
-            <div className="recall-forget">
-                <label>
-                    <input type='checkbox' />
-                    Lembre de mim
-                </label>
-                <a href='#'>Esqueci minha senha</a>
-            </div>           
-                <button>Entrar</button>
-            
-        </form>
-      
-    </div>
-  )
+        <div className='ground'>
+            <div className='container1'>
+                <div className='container'>
+
+                    <form onSubmit={handleSubmit}>
+                        <h1>Entrar</h1>
+                        <div className='input-field'>
+                            <input type='text' placeholder='Login' value={login}
+                                onChange={(e) => setLogin(e.target.value)} />
+                            <FaUser className='icon' />
+                        </div>
+                        <div className='input-field'>
+                            <input type="password" placeholder='Senha' value={password}
+                                onChange={(e) => setPassword(e.target.value)} />
+                            <FaLock className='icon' />
+                        </div>
+
+                        <div className="recall-forget">
+                            <label>
+                                <input type='checkbox' />
+                                Lembre de mim
+                            </label>
+                            <a href='#'>Esqueci minha senha</a>
+                        </div>
+                        <button>Entrar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    )
 }
 
 export default Login

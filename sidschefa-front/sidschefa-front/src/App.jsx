@@ -2,44 +2,101 @@ import './App.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Login from './Components/Login/Login';
 import Home from './Components/Home/Home';
-// import PrivateRoute from './Routes/PrivateRoute';
 import UserRegister from './Components/UserRegister/UserRegister';
 import ProtectedRoute from './Routes/ProtectedRoute';
 import NoAccessPage from './Components/NoAccessPage/NoAccessPage';
+import Curriculum from './Components/Curriculum/Curriculum';
+import Contact from './Components/Contact/Contact';
+import Projetos from './Components/Projetos/Projetos';
+import { getUserRole } from './utils/auth';
+import { jwtDecode } from 'jwt-decode';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
+function App() {''
 
-// import NotFound from './Components/NotFound/NotFound';
+  let logspace = "";
+  let button = "";
 
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-function App() {
+  let userId = () => {
+    const token = localStorage.getItem('token');
+    const decode = jwtDecode(token);
+    return decode.userId;
+  }
+
+  if (getUserRole() !== null) {
+    const id = userId().trim();
+    useEffect(() => {
+      const fetchData = async () => {
+        try {
+          const response = await fetch("http://localhost:8080/user/" + id)
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          const result = await response.text();
+          setData(result);
+        } catch (error) {
+          setError(error.message);
+        } finally {
+          setLoading(false);
+        }
+      };
+      fetchData();
+    }, []);
+  }
+
+  const logout = () => {
+    localStorage.removeItem('token');
+    window.location.href = './';
+  };
+
+  if (getUserRole() === null) {
+    logspace = <a href='./login'><p>Entre</p></a>;
+  } else {
+    logspace = <p>Olá, {data}</p>;
+    button = <p onClick={logout}>Sair</p>;
+  }
+
   return (
     <Router>
-      <div className='header'>
-        <div className='navigate'>
-          <div>
-            <h1>Sidney Adrian Schaefer</h1>
-          </div>
+      <div className='app'>
+        <div className='login'>
+          {logspace}
+          {button}
+        </div>
+
+
+        <div className='title'>
           <nav>
-            <a>Curriculum</a>
-            <a>Aplicações</a>
+            <a className='a1'>Port</a>
+            <a className='a2'>folio</a>
           </nav>
         </div>
-       
-      <div className="App">       
+
 
         <Routes>
-        
-          <Route path="/Login/" element={<Login />} />
-          
-          <Route path="/" element={<Home />} />        
 
-          <Route path='/UserRegister' element={<ProtectedRoute element={<UserRegister />} requiredRole="ADMIN" />} />       
+          <Route path="/Login/" element={<Login />} />
+
+          <Route path="/" element={<Home />} />
+
+          <Route path='/UserRegister' element={<ProtectedRoute element={<UserRegister />} requiredRole="ADMIN" />} />
+
+          <Route path='/Curriculum' element={<ProtectedRoute element={<Curriculum />} requiredRole={['USER', 'ADMIN']} />} />
+
+          <Route path='/Contact' element={<ProtectedRoute element={<Contact />} requiredRole={['USER', 'ADMIN']} />} />
+
+          <Route path='Projetos' element={<ProtectedRoute element={<Projetos />} requiredRole={['USER', 'ADMIN']} />} />
 
           <Route path="/NoAccessPage" element={<NoAccessPage />} />
-          
-          
-          
-          
+
+
+
+
           {/* <Route
             path="/UserRegister/"
             element={
@@ -54,9 +111,9 @@ function App() {
           {/* <Route path="*" element={<NotFound />} /> */}
         </Routes>
       </div>
-      </div>
+
     </Router>
-  );  
+  );
 }
 
 export default App;

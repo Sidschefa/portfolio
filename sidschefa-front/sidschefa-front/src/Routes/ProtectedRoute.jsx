@@ -3,11 +3,16 @@ import { Navigate } from 'react-router-dom';
 import { getUserRole } from '../utils/auth';
 
 const ProtectedRoute = ({ element, requiredRole }) => {
+
   const userRole = getUserRole();
 
-  if (userRole === requiredRole) {
+  if (requiredRole.includes(userRole)) {
     return element;
-  } else {
+  } else if (userRole === null) {
+    return <Navigate to="/Login" />;
+  }
+
+  else {
     return <Navigate to="/NoAccessPage" />;
   }
 };

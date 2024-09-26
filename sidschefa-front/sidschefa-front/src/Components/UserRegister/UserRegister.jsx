@@ -19,79 +19,79 @@ const UserRegister = () => {
 
         try {
             const response = await axios.post('http://localhost:8080/auth/register', {
-                
+
                 userName: userName,
                 email: email,
-                role: role,    
+                role: role,
                 login: login,
-                password: password                
-            });
-
+                password: password,    
+                
+            });            
             const token = response.data.token;
 
-            localStorage.setItem('token', token); 
+            localStorage.setItem('token', token);
 
-            navigate('/UserRegister');
+            navigate('/UserRegister');           
 
-            setLogin(""); 
-            setPassword("");
-            setUserName("")
-            setEmail("");
-            setRole("USER");
-
-        } catch(err){
+        } catch (err) {
             console.error("erro ao fazer login", err);
-            setError("Credenciais inválidas. Tente novamente.");            
-            
-            setLogin(""); 
-            setPassword("");
-            setUserName("")
-            setEmail("");
-            setRole("USER");
-
+            setError("Credenciais inválidas. Tente novamente.");
         }
-    
+
+        setLogin("");
+        setPassword("");
+        setUserName("")
+        setEmail("");
+        setRole("USER");
+        
+
     }
 
-  return (
-    <div className='container'>
-        <div>teste</div>
+    return (
 
-        <form onSubmit={handleSubmit}>
-            <h1>Cadastro de novo Usuário</h1>
+        <div className='ground'>
+            <div className='container1'>
+                <div className='container'>
 
-            <div className='input-field'>
-                 <input type='text' placeholder='Nome' value={userName}
-                 onChange={(e) => setUserName(e.target.value)} />                 
-            </div>
+                    <form onSubmit={handleSubmit}>
+                        <h1>Cadastro de novo Usuário</h1>
 
-            <div className='input-field'>
-                 <input type='text' placeholder='E-mail' value={email}
-                 onChange={(e) => setEmail(e.target.value)} />                 
-            </div>
+                        <div className='input-field'>
+                            <input type='text' placeholder='Nome' value={userName}
+                                onChange={(e) => setUserName(e.target.value)} />
+                        </div>
 
-            <div className='input-field'>
-                 <input type='text' placeholder='Login' value={login}
-                 onChange={(e) => setLogin(e.target.value)} />                 
-            </div>
+                        <div className='input-field'>
+                            <input type='text' placeholder='E-mail' value={email}
+                                onChange={(e) => setEmail(e.target.value)} />
+                        </div>
 
-            <div className='input-field'>
-                 <input type="password" placeholder='Senha' value={password}
-                 onChange={(e) => setPassword(e.target.value)} />                 
-            </div>
+                        <div className='input-field'>
+                            <input type='text' placeholder='Login' value={login}
+                                onChange={(e) => setLogin(e.target.value)} />
+                        </div>
 
-            <div className='input-field'>
-                 <select value={role} onChange={(e) => setRole(e.target.value)}>
-                    <option value="USER">USER</option> 
-                    <option value="ADMIN">ADMIN</option>  
-                </select>                                
-            </div>
-            
-                <button>Salvar</button>
-            
-        </form>
-      
-    </div>
+                        <div className='input-field'>
+                            <input type="password" placeholder='Senha' value={password}
+                                onChange={(e) => setPassword(e.target.value)} />
+                        </div>
+
+                        <div className='select-field'>
+                            <select value={role} onChange={(e) => setRole(e.target.value)}>
+                                <option value="USER">USER</option>
+                                <option value="ADMIN">ADMIN</option>
+                            </select>
+                        </div>
+
+                        <button>Salvar</button>
+
+                    </form>
+
+
+                </div>
+            </div>    
+        </div >
+    
   )
 }
 

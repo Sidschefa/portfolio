@@ -11,7 +11,8 @@ import Projetos from './Components/Projetos/Projetos';
 import { getUserRole } from './utils/auth';
 import { jwtDecode } from 'jwt-decode';
 import { useEffect, useState } from 'react';
-import axios from 'axios';
+import UserPainel from './Components/UserRegister/UserPainel';
+import UserDetails from './Components/UserRegister/UserDetails';
 
 function App() {''
 
@@ -30,6 +31,7 @@ function App() {''
 
   if (getUserRole() !== null) {
     const id = userId().trim();
+
     useEffect(() => {
       const fetchData = async () => {
         try {
@@ -91,6 +93,10 @@ function App() {''
           <Route path='/Contact' element={<ProtectedRoute element={<Contact />} requiredRole={['USER', 'ADMIN']} />} />
 
           <Route path='Projetos' element={<ProtectedRoute element={<Projetos />} requiredRole={['USER', 'ADMIN']} />} />
+
+          <Route path='UserPainel' element={<ProtectedRoute element={<UserPainel />} requiredRole={'ADMIN'} />} />
+
+          <Route path='UserDetails' element={<ProtectedRoute element={<UserDetails />} requiredRole={'ADMIN'} />} />
 
           <Route path="/NoAccessPage" element={<NoAccessPage />} />
 

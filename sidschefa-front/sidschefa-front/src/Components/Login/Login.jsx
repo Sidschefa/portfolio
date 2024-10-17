@@ -1,9 +1,10 @@
 import React from 'react'
-import { FaUser, FaLock } from "react-icons/fa";
+import { FaUser, FaLock, FaArrowCircleLeft } from "react-icons/fa";
 import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import "./Login.css"
+
 
 const Login = () => {
 
@@ -12,6 +13,8 @@ const Login = () => {
     const [error, setError] = useState("")
     const navigate = useNavigate();
 
+
+    // Função para requidição post de login
     const handleSubmit = async (event) => {
         event.preventDefault();
 
@@ -49,7 +52,11 @@ const Login = () => {
 
         <div className='ground'>
             <div className='container1'>
+                <div>
+                    <a href="/" className='backArrowLogin'><i><FaArrowCircleLeft /></i></a>
+                </div>
                 <div className='container'>
+
 
                     <form onSubmit={handleSubmit}>
                         <h1>Entrar</h1>

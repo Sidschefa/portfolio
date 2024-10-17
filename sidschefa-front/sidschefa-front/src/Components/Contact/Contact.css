@@ -36,3 +36,11 @@
     margin: 50px;
     
 }
+
+.backArrow{
+  display: block;
+  color:#5a5a5ad3;
+  font-size: 25px;
+  margin-top: 10px;
+  margin-left: 10px;
+}

@@ -33,9 +33,7 @@ const UserDetails = () => {
                 setEmail(result.email);
                 setLogin(result.login);
                 setPassword(result.password);
-                setRole({ role: result.role });
-
-            
+                setRole({ role: result.role });            
 
           } catch (error) {
             setError(error.message);

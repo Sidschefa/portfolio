@@ -1,41 +1,41 @@
 import React from 'react';
-import { FaUser, FaLock, FaGithub } from "react-icons/fa";
+import { FaGithub } from "react-icons/fa";
 import "./Home.css"
 
-
+// Página home somente com links de direcionamento
 const Home = () => {
   return (
     <div className='ground'>
       <div className='container1'>
         <div>
           <div className='nameS'>
-            <h1 className="">Sidney Adrian Schaefer</h1>          
-          <nav>            
-            <a href='/Curriculum'>Curriculum</a>
-            <a href='/Projetos'>Projetos</a>
-            <a href='/Contact'>Contato</a>            
-          </nav>
-          <a className="i"href='https://github.com/Sidschefa' target='_blank'><i><FaGithub className='icon'/></i></a>          
-        </div>
+            <h1 className="">Sidney Adrian Schaefer</h1>
+            <nav>
+              <a href='/Curriculum'>Curriculum</a>
+              <a href='/Projetos'>Projetos</a>
+              <a href='/Contact'>Contato</a>
+            </nav>
+            <a className="i" href='https://github.com/Sidschefa' target='_blank'><i><FaGithub className='icon' /></i></a>
+          </div>
         </div>
 
         <div className='container2'>
           <div>
             <h1>Desenvolvedor Java</h1>
-          </div>          
+          </div>
           <div>
-            <img className='foto' src="/src/assets/foto.jpg"/>  
-          </div>          
+            <img className='foto' src="/src/assets/foto.jpg" />
+          </div>
         </div>
         <div className='container3'>
-         <h1>sobre</h1>
+          <h1>sobre</h1>
           <div className='bar'></div>
         </div>
         <div className='sobre'>
           <h3>Desenvolvedor java iniciante em busca de oportunidade.</h3>
         </div>
       </div>
-      
+
     </div>
   );
 }

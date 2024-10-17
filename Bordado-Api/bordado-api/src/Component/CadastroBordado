@@ -1,0 +1,175 @@
+import React, { useState } from 'react';
+
+const Formulario = () => {
+  // Estados para os campos do cabeçalho
+  const [referencia, setReferencia] = useState('');
+  const [titulo, setTitulo] = useState('');
+  const [dataSolicitacao, setDataSolicitacao] = useState('');
+  const [observacao, setObservacao] = useState('');
+  const [valor, setValor] = useState('');
+
+  // Estado para materiais
+  const [materiais, setMateriais] = useState([]);
+
+  // Função para adicionar um material
+  const adicionarMaterial = () => {
+    const materialEscolhido = prompt('Selecione um material: (exemplo: "Material X")');
+    if (materialEscolhido) {
+      setMateriais([
+        ...materiais,
+        { nome: materialEscolhido, consumoX: '', consumoY: '' }
+      ]);
+    }
+  };
+
+  // Função para remover um material da lista
+  const removerMaterial = (index) => {
+    const novosMateriais = materiais.filter((_, i) => i !== index);
+    setMateriais(novosMateriais);
+  };
+
+  // Funções para atualizar campos de consumo dos materiais
+  const atualizarConsumoX = (index, valor) => {
+    const novosMateriais = [...materiais];
+    novosMateriais[index].consumoX = valor;
+    setMateriais(novosMateriais);
+  };
+
+  const atualizarConsumoY = (index, valor) => {
+    const novosMateriais = [...materiais];
+    novosMateriais[index].consumoY = valor;
+    setMateriais(novosMateriais);
+  };
+
+  // Estados para os campos adicionais
+  const [qtdPontos, setQtdPontos] = useState('');
+  const [qtdCortes, setQtdCortes] = useState('');
+  const [qtdParagens, setQtdParagens] = useState('');
+  const [qtdApliques, setQtdApliques] = useState('');
+
+  return (
+    <form>
+      {/* Cabeçalho */}
+      <h2>Formulário de Pedido</h2>
+      <label>
+        Referência:
+        <input
+          type="text"
+          value={referencia}
+          onChange={(e) => setReferencia(e.target.value)}
+        />
+      </label>
+      <br />
+      <label>
+        Título:
+        <input
+          type="text"
+          value={titulo}
+          onChange={(e) => setTitulo(e.target.value)}
+        />
+      </label>
+      <br />
+      <label>
+        Data Solicitação:
+        <input
+          type="date"
+          value={dataSolicitacao}
+          onChange={(e) => setDataSolicitacao(e.target.value)}
+        />
+      </label>
+      <br />
+      <label>
+        Observação:
+        <textarea
+          value={observacao}
+          onChange={(e) => setObservacao(e.target.value)}
+        />
+      </label>
+      <br />
+      <label>
+        Valor:
+        <input
+          type="number"
+          value={valor}
+          onChange={(e) => setValor(e.target.value)}
+        />
+      </label>
+      <br />
+
+      {/* Seção de Materiais */}
+      <h3>Materiais</h3>
+      <button type="button" onClick={adicionarMaterial}>
+        Adicionar Material
+      </button>
+
+      <ul>
+        {materiais.map((material, index) => (
+          <li key={index}>
+            {material.nome}
+            <br />
+            Consumo X (mm):
+            <input
+              type="number"
+              value={material.consumoX}
+              onChange={(e) => atualizarConsumoX(index, e.target.value)}
+            />
+            <br />
+            Consumo Y (mm):
+            <input
+              type="number"
+              value={material.consumoY}
+              onChange={(e) => atualizarConsumoY(index, e.target.value)}
+            />
+            <button type="button" onClick={() => removerMaterial(index)}>
+              Remover
+            </button>
+          </li>
+        ))}
+      </ul>
+
+      {/* Campos adicionais */}
+      <h3>Dados Adicionais</h3>
+      <label>
+        Quantidade de pontos:
+        <input
+          type="number"
+          value={qtdPontos}
+          onChange={(e) => setQtdPontos(e.target.value)}
+        />
+      </label>
+      <br />
+      <label>
+        Quantidade de cortes:
+        <input
+          type="number"
+          value={qtdCortes}
+          onChange={(e) => setQtdCortes(e.target.value)}
+        />
+      </label>
+      <br />
+      <label>
+        Quantidade de paragens:
+        <input
+          type="number"
+          value={qtdParagens}
+          onChange={(e) => setQtdParagens(e.target.value)}
+        />
+      </label>
+      <br />
+      <label>
+        Quantidade de apliques:
+        <input
+          type="number"
+          value={qtdApliques}
+          onChange={(e) => setQtdApliques(e.target.value)}
+        />
+      </label>
+      <br />
+
+      {/* Botão de envio (apenas visual, sem envio real por enquanto) */}
+      <button type="submit">Enviar Pedido</button>
+    </form>
+  );
+};
+
+export default Formulario;

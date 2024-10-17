@@ -1,5 +1,4 @@
-.container1 {       
-    
+.container1 {     
     width: 100%;  
     height: 700px; 
     padding: 5%;
@@ -99,3 +98,9 @@
     font-weight: 600;
     text-shadow: none;
 }
+
+.backArrowLogin{    
+    color:#5a5a5ad3;
+    font-size: 25px;
+   
+  }

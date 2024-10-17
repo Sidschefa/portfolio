@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './UserRegister.css'
 import { useNavigate } from 'react-router-dom';
+import { FaEdit, FaGithub, FaTrash } from "react-icons/fa";
+
 
 const UserPainel = () => {
     const [users, setUsers] = useState([]);
@@ -19,36 +21,36 @@ const UserPainel = () => {
         fetchUsers();
     }, []);
 
-    const userDelete = async (id) => {        
-            
+    const userDelete = async (id) => {
+
         try {
-            await axios.delete('http://localhost:8080/user/delete/'+id);
+            await axios.delete('http://localhost:8080/user/delete/' + id);
             setUsers(users.filter(user => user.id !== id));
-            
+
 
             const token = response.data.token;
 
             localStorage.setItem('token', token);
 
-            navigate('/UserRegister');  
+            navigate('/UserRegister');
 
-        }catch (error) {
+        } catch (error) {
             console.error('Erro ao excluir usuário:', error);
-          }
+        }
     }
 
     const userEdit = (id) => {
         navigate('/UserDetails');
-        location.reload();  
+        location.reload();
         localStorage.setItem('idUser', id)
     }
 
     return (
         <div className='ground'>
-            <div className='container1'>                
+            <div className='container1'>
 
-                    <table>
-                        <tbody>
+                <table className='itens'>
+                    <tbody>
                         <tr>
                             <td>Nome</td>
                             <td>E-mail</td>
@@ -56,24 +58,23 @@ const UserPainel = () => {
                         </tr>
 
                         {users.map(user => (
-                        <tr key={user.id}>
-                            <td>{user.username}</td>
-                            <td>{user.email}</td>
-                            <td>{user.role}</td>
-                            <td>{user.id}</td>
+                            <tr key={user.id}>
+                                <td>{user.username}</td>
+                                <td>{user.email}</td>
+                                <td>{user.role}</td>
 
-                            <td>
-                                <button onClick={() => userEdit(user.id)}>Editar</button>
-                            </td>
+                                <td>
+                                    <label onClick={() => userEdit(user.id)}><i><FaEdit /></i></label>
 
-                            <td>
-                                <button onClick={() => userDelete(user.id)}>Excluir</button>
-                            </td>
-                        </tr>
+                                </td>
+                                <td>
+                                    <label onClick={() => userDelete(user.id)}><i><FaTrash /></i></label>
+                                </td>
+                            </tr>
                         ))}
 
-</tbody>
-                    </table>  
+                    </tbody>
+                </table>
             </div>
         </div>
     );

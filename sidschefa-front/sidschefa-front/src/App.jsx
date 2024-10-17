@@ -13,22 +13,28 @@ import { jwtDecode } from 'jwt-decode';
 import { useEffect, useState } from 'react';
 import UserPainel from './Components/UserRegister/UserPainel';
 import UserDetails from './Components/UserRegister/UserDetails';
+import { FaCog } from 'react-icons/fa';
 
-function App() {''
+function App() {
+
 
   let logspace = "";
   let button = "";
+  let dropButton = ""
+
 
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  // retorna o código do usuário descriptografado
   let userId = () => {
     const token = localStorage.getItem('token');
     const decode = jwtDecode(token);
     return decode.userId;
   }
 
+  // Função retorna o nome do usuário no cabeçalho
   if (getUserRole() !== null) {
     const id = userId().trim();
 
@@ -51,16 +57,31 @@ function App() {''
     }, []);
   }
 
+  // Função para fazer fazer logout do usuário
   const logout = () => {
     localStorage.removeItem('token');
     window.location.href = './';
   };
 
+  // Função carrega os ítens do cabeçalho caso esteja logado ou não
   if (getUserRole() === null) {
     logspace = <a href='./login'><p>Entre</p></a>;
   } else {
     logspace = <p>Olá, {data}</p>;
+
     button = <p onClick={logout}>Sair</p>;
+
+    if(getUserRole() === "ADMIN"){
+    dropButton = <div class="dropdown">
+      <button><i><FaCog /></i></button>
+      <div class="dropdown-content">
+        <a href="/UserPainel">Usuários</a>
+        <a href="/UserRegister">Cadastrar Usuários</a>
+        <a href="/UserPainel">Alterar Usuários</a>
+      </div>
+    </div>;
+    }
+
   }
 
   return (
@@ -69,8 +90,8 @@ function App() {''
         <div className='login'>
           {logspace}
           {button}
+          {dropButton}
         </div>
-
 
         <div className='title'>
           <nav>
@@ -79,7 +100,7 @@ function App() {''
           </nav>
         </div>
 
-
+        {/* Define as rotas de acordo com role do usuário logado */}
         <Routes>
 
           <Route path="/Login/" element={<Login />} />

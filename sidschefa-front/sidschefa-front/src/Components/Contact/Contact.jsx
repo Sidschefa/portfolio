@@ -1,11 +1,15 @@
 import React from 'react'
-import { FaArrowAltCircleUp, FaGit, FaGithub, FaLinkedin, FaSeedling, FaVoicemail, FaWhatsapp } from 'react-icons/fa'
+import { FaArrowAltCircleUp, FaArrowCircleLeft, FaBackward, FaGithub, FaLinkedin, FaWhatsapp } from 'react-icons/fa'
 import './Contact.css'
 
+// Somentepágina HTML
 const Contact = () => {
     return (
         <div className='ground2'>
             <div className='container4'>
+                <div>
+                    <a href="/" className='backArrow'><i><FaArrowCircleLeft/></i></a>
+                </div>
                 <div className='content'>
                     <h1>Entre em contato pelos canais:</h1>
                     <p className="item">Celular: (47) 98455-6935 <a href="https://wa.me/554784556935?text=Olá,%20assim%20que%20possível%20retornarei,%20obrigado!" target="_blank"><i>{<FaWhatsapp />}</i></a></p>
